@@ -26,24 +26,29 @@ import {
   doc
 } from "firebase/firestore";
 
-function Tab1() {
-  const noteCollectionRef = collection(db, "note");
 
-  useEffect(() => {
-    const getNotes = async () => {
-      const data = await getDocs(noteCollectionRef);
-      setNotes(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+function Tab1() {
+
+  const BooksList = ({ getBookId }) => {
+    const [books, setBooks] = useState([]);
+    useEffect(() => {
+      getBooks();
+    }, []);
+
+    const getBooks = async () => {
+      const data = await BookDataService.getAllBooks();
+      console.log(data.docs);
+      setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
-    getNotes();
-  }, []);
-  {
-    notes.map((note) => {
+
+
       return (
         <IonPage>
           <IonHeader>
             <IonToolbar>
-              <IonTitle>Add</IonTitle>
+              <IonTitle>My Notes</IonTitle>
             </IonToolbar>
           </IonHeader>
 
@@ -51,16 +56,17 @@ function Tab1() {
             <ion-card>
               <ion-card-header>
                 <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                <ion-card-title> {note.title} </ion-card-title>
+                <ion-card-title> Title  </ion-card-title>
               </ion-card-header>
-              <ion-card-content>{note.note}</ion-card-content>
+              <ion-card-content>C:/Users/33612/Documents/projects/mage/node_modules/firebase/node_modules/@firebase/firestore/dist/index.d.ts(27,47): </ion-card-content>
               <IonButton color="primary">Voir</IonButton>
             </ion-card>
+
           </ion-content>
         </IonPage>
       );
-    });
-  }
+
+
 }
 
 export default Tab1;

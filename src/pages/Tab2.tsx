@@ -33,7 +33,7 @@ function Tab2() {
   const pushnote = async () => {
     console.log(title, note);
 
-    await addDoc(noteCollectionRef, { name: title, age: note });
+    await addDoc(noteCollectionRef, { name: title, note: note });
   };
 
   return (
