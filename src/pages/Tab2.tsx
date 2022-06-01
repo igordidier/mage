@@ -28,7 +28,7 @@ import {
 function Tab2() {
   const [title, settitle] = useState("");
   const [note, setnote] = useState("");
-  const noteCollectionRef = collection(db, "note");
+  const noteCollectionRef = collection(db, "notes");
 
   const pushnote = async () => {
     console.log(title, note);

@@ -28,20 +28,18 @@ import {
 
 
 
+
 function Tab1() {
+cost [notes, setNote] = useState([]);
 
-  const BooksList = ({ getBookId }) => {
-    const [books, setBooks] = useState([]);
-    useEffect(() => {
-      getBooks();
-    }, []);
 
-    const getBooks = async () => {
-      const data = await BookDataService.getAllBooks();
-      console.log(data.docs);
-      setBooks(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
+useEffect(() => {
 
+db.collection('notes').onsnapshot(snapshot => {
+  setNote(snapshot.docs.map(doc => ({id:doc.id, note:doc.data().notes})))
+})
+
+}, []);
 
 
       return (
@@ -53,14 +51,7 @@ function Tab1() {
           </IonHeader>
 
           <ion-content>
-            <ion-card>
-              <ion-card-header>
-                <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
-                <ion-card-title> Title  </ion-card-title>
-              </ion-card-header>
-              <ion-card-content>C:/Users/33612/Documents/projects/mage/node_modules/firebase/node_modules/@firebase/firestore/dist/index.d.ts(27,47): </ion-card-content>
-              <IonButton color="primary">Voir</IonButton>
-            </ion-card>
+          {notes.map(note =>( ))}
 
           </ion-content>
         </IonPage>
