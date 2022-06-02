@@ -1,5 +1,7 @@
 {
   "name": "ionic-tabs-template",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

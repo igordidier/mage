@@ -13,20 +13,13 @@ import { calendar, add, clipboard } from "ionicons/icons";
 import { IonReactRouter } from "@ionic/react-router";
 import ExploreContainer from "../components/ExploreContainer";
 import "./Tab3.css";
-import addproj from "./addprojects";
+
 
 const Tab3: React.FC = () => {
 
 
-const pageaddproj = async () => {
-  console.log('clicked');
-};
-
   return (
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route path="./addprejects" component={addproj} exact={true} />
-      </IonRouterOutlet>
+
 
       <IonPage>
         <IonHeader>
@@ -35,8 +28,8 @@ const pageaddproj = async () => {
           </IonToolbar>
         </IonHeader>
         <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button href="./addprojects">
-            <IonIcon tab="addproj" icon={add} />
+          <ion-fab-button >
+            <IonIcon/>
           </ion-fab-button>
         </ion-fab>
         <IonContent fullscreen>
@@ -48,7 +41,7 @@ const pageaddproj = async () => {
           <ExploreContainer name="Tab 3 page" />
         </IonContent>
       </IonPage>
-    </IonReactRouter>
+
   );
 };
 
