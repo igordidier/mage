@@ -25,7 +25,7 @@ import {
   doc
 } from "firebase/firestore";
 
-function Tab2() {
+function addproj() {
   const [title, settitle] = useState("");
   const [note, setnote] = useState("");
   const [link, setlink] = useState("");
@@ -99,4 +99,4 @@ function Tab2() {
   );
 }
 
-export default Tab2;
+export default addproj;

@@ -19,6 +19,7 @@ import Results from "../components/note";
 import "./Tab1.css";
 import { db } from "../firebase.js";
 import {
+  onSnapshot,
   collection,
   getDocs,
   addDoc,
@@ -26,9 +27,12 @@ import {
   deleteDoc,
   doc
 } from "firebase/firestore";
-
-
-
+const deleteChangeHandler = async (id: any) => {
+  const docRef = doc(db, "notes", id);
+  await deleteDoc(docRef);
+  // INITIAL_TODO = INITIAL_TODO.filter((item) => item.task !== deleteTask);
+  // setNewTodo(INITIAL_TODO);
+};
 
 const Tab1: React.FC = () => {
   const [newTodo, setNewTodo] = useState([] as any);
@@ -36,32 +40,34 @@ const Tab1: React.FC = () => {
   useEffect(
     () =>
       onSnapshot(collection(db, "notes"), (snapshot) =>
-        setNote(snapshot.docs.map((doc) =>({... doc.data(), id: doc.id})))
+        setNote(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       ),
     []
   );
 
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>My Notes</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
-      return (
-        <IonPage>
-          <IonHeader>
-            <IonToolbar>
-              <IonTitle>My Notes</IonTitle>
-            </IonToolbar>
-          </IonHeader>
-
-          <ion-content>
-          {notes.map((note: any) => (
-              <div key={note.id}>
-                <Results id={note.id} task={notes.titile} description={notes.note} />
-              </div>
-            ))}
-
-          </ion-content>
-        </IonPage>
-      );
-
-
-}
+      <ion-content>
+        {notes.map((notes: any) => (
+          <div key={notes.id}>
+            <Results
+              id={notes.id}
+              title={notes.title}
+              note={notes.note}
+              link={notes.link}
+              onDelete={deleteChangeHandler}
+            />
+          </div>
+        ))}
+      </ion-content>
+    </IonPage>
+  );
+};
 
 export default Tab1;
